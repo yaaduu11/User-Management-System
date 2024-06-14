@@ -1,0 +1,49 @@
+<% include('../layouts/header.ejs') %>
+
+<link rel="stylesheet" href="/admin/new-user.css">
+
+<h1>Add New User</h1>
+
+<form action="" method="post" >
+    <input type="text" name="name" placeholder="Enter Name" required>
+    <br><br>
+    <input type="email" name="email" placeholder="Enter Email" required>
+    <br><br>
+    <input type="text" name="mno" placeholder="Enter Mobile" required>
+    <br><br>
+    <input type="text" name="password" placeholder="Enter Password" required>
+    <br><br>
+    <input type="submit" value="Add User">
+</form>
+
+
+
+<%
+   if(typeof message !== 'undefined'){
+    %>
+    <p style="color: red;"><%= message %></p>
+    <%
+ }
+
+%>
+
+<a href="/admin/dashboard">Go Back</a>
+
+<% include('../layouts/footer.ejs') %>
+
+<!-- <script>
+    function validateForm() {
+
+        var nameInput = document.getElementById('name').value;
+        var emailInput = document.getElementById('email').value;
+        var mnoInput = document.getElementById('mno').value;
+        var passwordInput = document.getElementById('password').value;
+
+         if (nameInput.trim() === '' || emailInput.trim() === '' || mnoInput.trim() === '' || passwordInput.trim() === '') {
+            alert("Please type actual letters.");
+                 return false; 
+        }
+
+        return true;
+}
+</script> -->

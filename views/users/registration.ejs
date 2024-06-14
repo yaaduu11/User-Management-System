@@ -1,0 +1,63 @@
+<% include('../layouts/header.ejs') %>
+
+<link rel="stylesheet" href="/users/registration.css">
+
+<h1>User Registration Form</h1>
+
+<form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+    <input type="text" name="name" id="name" placeholder="Enter Name" required>
+    <br><br>
+    <input type="email" name="email" id="email" placeholder="Enter Email" required>
+    <br><br>
+    <input type="text" name="mno" id="mno" placeholder="Enter Mobile" required>
+    <br><br>
+    <input type="password" name="password" id="password" placeholder="Enter Password" required>
+    <br><br>
+    <input type="submit" value="Register">
+</form>
+
+<% if (typeof message !== 'undefined') { %>
+    <p style="color: green;"><%= message %></p>
+<% } %>
+
+<% include('../layouts/footer.ejs') %>
+
+<script>
+    function validateForm() {
+
+        var nameInput = document.getElementById('name').value;
+        var emailInput = document.getElementById('email').value;
+        var mnoInput = document.getElementById('mno').value;
+        var passwordInput = document.getElementById('password').value;
+
+         if (nameInput.trim() === '' || emailInput.trim() === '' || mnoInput.trim() === '' || passwordInput.trim() === '') {
+            alert("Please type actual letters.");
+                 return false; 
+        }
+
+        return true;
+}
+
+function checkEmail() {
+        var email = document.getElementById('email').value;
+        fetch('/check-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.isAvailable) {
+                alert('Invalid email. This one is already used.');
+                document.getElementById('email');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    document.getElementById('email').addEventListener('blur', checkEmail);
+</script>

@@ -1,0 +1,34 @@
+<% include('../layouts/header.ejs') %>
+
+<link rel="stylesheet" href="/users/home.css">
+
+
+<h3>Welcome, <%= user.name %> </h3>
+
+<table width="50%">
+    <tr>
+        <td>email</td>
+        <td><%= user.email %></td>
+    </tr>
+    <tr>
+        <td>mobile</td>
+        <td><%= user.mobile %></td>
+    </tr>
+    <tr>
+        <td>verified</td>
+        <td>
+            <% if(user.is_verified == 0){
+                %>
+                <p>Verified</p>
+                <%
+            }
+            %>
+        </td>
+    </tr>
+</table>
+
+<a href="/edit?id=<%= user._id %>">Edit</a>
+<br>
+<a href="/logout">Logout</a>
+
+<% include('../layouts/footer.ejs') %>
